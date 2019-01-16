@@ -6,10 +6,14 @@ var logger = require("morgan");
 var indexRouter = require("./routes/index");
 // var usersRouter = require("./routes/users");
 var productsRouter = require("./routes/products");
-var prodMod = require('./routes/prodMod')
+var prodMod = require("./routes/prodMod");
 // var testRouter = require("./routes/test");
 
+var bodyParser = require("body-parser");
 var app = express();
+app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -20,7 +24,6 @@ app.use("/assets", express.static(path.join(__dirname, "public")));
 
 // app.use("/test/1", testRouter);
 app.use("/api", productsRouter);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
